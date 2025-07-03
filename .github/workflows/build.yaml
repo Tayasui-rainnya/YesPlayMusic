@@ -17,7 +17,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [macos-latest, windows-latest, ubuntu-22.04]
+        os: [windows-latest, ubuntu-22.04]
 
     steps:
       - name: Check out Git repository
@@ -60,15 +60,6 @@ jobs:
             @unblockneteasemusic/rust-napi-win32-x64-msvc@${{steps.get_unm_version.outputs.unmver}}
         shell: bash
 
-      - name: Install UNM dependencies for macOS
-        if: runner.os == 'macOS'
-        run: |
-          ${{ env.YARN_INSTALL_NOPT }} \
-            @unblockneteasemusic/rust-napi-darwin-x64@${{steps.get_unm_version.outputs.unmver}} \
-            @unblockneteasemusic/rust-napi-darwin-arm64@${{steps.get_unm_version.outputs.unmver}} \
-            dmg-license
-        shell: bash
-
       - name: Install UNM dependencies for Linux
         if: runner.os == 'Linux'
         run: |
@@ -97,11 +88,7 @@ jobs:
 
           use_vue_cli: true
 
-      - uses: actions/upload-artifact@v4
-        with:
-          name: YesPlayMusic-mac
-          path: dist_electron/*-universal.dmg
-          if-no-files-found: ignore
+
 
       - uses: actions/upload-artifact@v4
         with:
