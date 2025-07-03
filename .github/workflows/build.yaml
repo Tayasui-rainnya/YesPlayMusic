@@ -38,6 +38,7 @@ jobs:
           sudo apt-get install --no-install-recommends -y rpm &&
           sudo apt-get install --no-install-recommends -y libarchive-tools &&
           sudo apt-get install --no-install-recommends -y libopenjp2-tools
+
       - name: Install Snapcraft (on Ubuntu)
         uses: samuelmeuli/action-snapcraft@v1
         if: startsWith(matrix.os, 'ubuntu')
@@ -96,19 +97,19 @@ jobs:
 
           use_vue_cli: true
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: YesPlayMusic-mac
           path: dist_electron/*-universal.dmg
           if-no-files-found: ignore
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: YesPlayMusic-win
           path: dist_electron/*Setup*.exe
           if-no-files-found: ignore
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: YesPlayMusic-linux
           path: dist_electron/*.AppImage
